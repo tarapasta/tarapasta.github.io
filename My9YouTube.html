@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>私を構成する9つのYouTubeチャンネル</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f8fb;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
+      color: #172033;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      width: min(430px, calc(100% - 24px));
+      margin: 14px auto 40px;
+    }
+
+    .name-box {
+      background: #fff;
+      border: 1px solid #d9e2ec;
+      border-radius: 13px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 12px;
+
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+    }
+
+    .name-label {
+      font-size: 11px;
+      color: #66758a;
+      margin-right: 14px;
+      white-space: nowrap;
+    }
+
+    .name-input {
+      border: 0;
+      outline: none;
+
+      width: 100%;
+
+      font-weight: 600;
+      color: #6c7c93;
+
+      background: transparent;
+    }
+
+    .guide {
+      margin-top: 14px;
+
+      background: #fff;
+
+      border: 1px solid #d9e2ec;
+      border-radius: 16px;
+
+      padding: 13px 14px;
+
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      box-shadow: 0 2px 7px rgba(15, 23, 42, 0.08);
+    }
+
+    .guide-icon {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 8px;
+      background: #0786d3;
+      color: #fff;
+
+      border: 0;
+
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 auto;
+
+      cursor: pointer;
+    }
+
+    .guide-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .guide-title {
+      font-size: 14px;
+      font-weight: 800;
+
+      margin-bottom: 3px;
+    }
+
+    .guide-text {
+      font-size: 11px;
+      color: #6d7d91;
+    }
+
+    .panel-wrap {
+      position: relative;
+      margin-top: 15px;
+    }
+
+    .start-label {
+      position: absolute;
+
+      left: 4px;
+      top: -10px;
+
+      z-index: 2;
+
+      background: #fff;
+      color: #0786d3;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      padding: 3px 10px;
+
+      border-radius: 5px;
+      border: 1px solid #55b8ef;
+    }
+
+    .panel {
+      background: #fff;
+
+      border: 1px solid #d9e2ec;
+      border-radius: 17px;
+
+      padding: 10px;
+
+      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .slot {
+      position: relative;
+
+      aspect-ratio: 0.78;
+
+      border-radius: 9px;
+      border: 2px dashed #dfe6ee;
+
+      background: #fff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      cursor: pointer;
+
+      overflow: hidden;
+
+      transition: 0.18s ease;
+
+      padding: 8px;
+    }
+
+    .slot:hover {
+      background: #f8fbfe;
+      border-color: #9fd8f7;
+    }
+
+    .slot.active {
+      border-color: #5ac4ff;
+      background: #fbfeff;
+    }
+
+    .plus {
+      font-size: 24px;
+      line-height: 1;
+
+      color: #5dc3fa;
+
+      font-weight: 300;
+
+      margin-bottom: 2px;
+    }
+
+    .slot-number {
+      font-size: 9px;
+
+      color: #bed0e4;
+
+      font-weight: 700;
+
+      letter-spacing: 0.03em;
+    }
+
+    .channel-icon {
+      width: 64px;
+      height: 64px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      margin-bottom: 8px;
+
+      border: 1px solid #e6edf4;
+    }
+
+    .channel-name {
+      font-size: 12px;
+      font-weight: 800;
+
+      text-align: center;
+
+      max-width: 100%;
+
+      overflow: hidden;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      line-height: 1.35;
+    }
+
+    .channel-handle {
+      font-size: 9px;
+
+      color: #8391a5;
+
+      margin-top: 4px;
+
+      max-width: 100%;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .remove {
+      position: absolute;
+
+      right: 5px;
+      top: 5px;
+
+      width: 22px;
+      height: 22px;
+
+      border-radius: 50%;
+      border: 0;
+
+      background: rgba(10, 20, 35, 0.08);
+
+      color: #516074;
+
+      cursor: pointer;
+
+      display: grid;
+      place-items: center;
+
+      font-size: 13px;
+
+      opacity: 0;
+
+      transition: 0.15s ease;
+    }
+
+    .slot.filled:hover .remove {
+      opacity: 1;
+    }
+
+    .modal {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 1000;
+
+      background: rgba(15, 23, 42, 0.34);
+
+      backdrop-filter: blur(2px);
+
+      display: flex;
+
+      align-items: flex-end;
+      justify-content: center;
+
+      padding: 12px;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
+
+    .modal-box {
+      width: min(460px, 100%);
+      max-height: 78vh;
+
+      background: #fff;
+
+      border-radius: 20px;
+
+      padding: 15px;
+
+      box-shadow: 0 20px 70px rgba(15, 23, 42, 0.25);
+
+      overflow-y: auto;
+
+      animation: slideUp 0.2s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(18px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-grab {
+      width: 42px;
+      height: 4px;
+
+      border-radius: 99px;
+
+      background: #dce3eb;
+
+      margin: 0 auto 12px;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .close {
+      width: 30px;
+      height: 30px;
+
+      border: 0;
+      border-radius: 50%;
+
+      background: #f2f5f8;
+
+      cursor: pointer;
+
+      color: #526174;
+    }
+
+    .search-row {
+      margin-top: 13px;
+
+      display: flex;
+
+      gap: 8px;
+    }
+
+    .search-input {
+      width: 100%;
+      min-width: 0;
+
+      border: 1px solid #dbe4ed;
+
+      outline: none;
+
+      border-radius: 11px;
+
+      padding: 11px 12px;
+    }
+
+    .search-input:focus {
+      border-color: #53bff8;
+
+      box-shadow:
+        0 0 0 3px rgba(83, 191, 248, 0.12);
+    }
+
+    .search-button {
+      border: 0;
+
+      border-radius: 11px;
+
+      background: #0786d3;
+
+      color: #fff;
+
+      padding: 0 16px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+    .search-button:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    .search-note {
+      margin-top: 8px;
+
+      font-size: 10px;
+
+      color: #8a98aa;
+    }
+
+    .results {
+      margin-top: 12px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 5px;
+    }
+
+    .result {
+      width: 100%;
+
+      display: flex;
+
+      gap: 11px;
+
+      align-items: center;
+
+      text-align: left;
+
+      background: #fff;
+
+      border: 0;
+
+      border-radius: 12px;
+
+      padding: 9px;
+
+      cursor: pointer;
+    }
+
+    .result:hover {
+      background: #f4f9fd;
+    }
+
+    .result img {
+      width: 52px;
+      height: 52px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      flex: 0 0 auto;
+    }
+
+    .result-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .result-title {
+      font-size: 13px;
+      font-weight: 800;
+
+      color: #172033;
+    }
+
+    .result-handle {
+      margin-top: 3px;
+
+      font-size: 11px;
+
+      color: #8391a5;
+    }
+
+    .result-subscribers {
+      margin-top: 3px;
+
+      font-size: 10px;
+
+      color: #8391a5;
+    }
+
+    .result-desc {
+      margin-top: 4px;
+
+      font-size: 10px;
+
+      color: #98a4b3;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      max-width: 300px;
+    }
+
+    .message {
+      color: #7e8da1;
+
+      font-size: 12px;
+
+      padding: 18px 8px;
+
+      text-align: center;
+    }
+
+    .error {
+      color: #c63e3e;
+    }
+
+    @media (min-width: 700px) {
+      .modal {
+        align-items: center;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <div class="name-box">
+
+      <span class="name-label">
+        名前
+      </span>
+
+      <input
+        id="userName"
+        class="name-input"
+        type="text"
+        placeholder="あなたの名前"
+      >
+
+    </div>
+
+
+    <div class="guide">
+
+      <button
+        id="guideSearch"
+        class="guide-icon"
+        type="button"
+        aria-label="検索"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <circle
+            cx="11"
+            cy="11"
+            r="6"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+
+          <path
+            d="M16 16L21 21"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+
+        </svg>
+
+      </button>
+
+
+      <div>
+
+        <div class="guide-title">
+          はじめてみよう
+        </div>
+
+        <div class="guide-text">
+          空きスロットをタップしてYouTubeチャンネルを検索
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel-wrap">
+
+      <div class="start-label">
+        ここから↓
+      </div>
+
+
+      <div class="panel">
+
+        <div
+          id="channelGrid"
+          class="grid"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <div
+    id="channelModal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <div class="modal-grab"></div>
+
+
+      <div class="modal-head">
+
+        <div class="modal-title">
+          YouTubeチャンネルを追加
+        </div>
+
+        <button
+          id="closeModal"
+          class="close"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="search-row">
+
+        <input
+          id="channelSearch"
+          class="search-input"
+          type="text"
+          placeholder="チャンネル名・@handle"
+        >
+
+        <button
+          id="searchButton"
+          class="search-button"
+          type="button"
+        >
+          検索
+        </button>
+
+      </div>
+
+
+      <div class="search-note">
+        YouTube Data API v3からチャンネルを検索します。
+      </div>
+
+
+      <div
+        id="searchResults"
+        class="results"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /*
+    ======================================================
+    ここだけ変更してください
+    ======================================================
+    */
+
+    const YOUTUBE_API_KEY = "AIzaSyD8cfRRRWc1qHf1XjLsfR4T_dpyx-GmbEE";
+
+
+    /*
+    ======================================================
+    基本設定
+    ======================================================
+    */
+
+    const SEARCH_RESULT_COUNT = 10;
+
+
+    const grid =
+      document.getElementById("channelGrid");
+
+    const modal =
+      document.getElementById("channelModal");
+
+    const closeModalButton =
+      document.getElementById("closeModal");
+
+    const searchInput =
+      document.getElementById("channelSearch");
+
+    const searchButton =
+      document.getElementById("searchButton");
+
+    const searchResults =
+      document.getElementById("searchResults");
+
+    const userName =
+      document.getElementById("userName");
+
+    const guideSearch =
+      document.getElementById("guideSearch");
+
+
+    let selectedSlotNumber = null;
+
+    let channelsState = {};
+
+
+    /*
+    ======================================================
+    初期化
+    ======================================================
+    */
+
+    function init() {
+
+      loadState();
+
+      createSlots();
+
+      loadUserName();
+
+    }
+
+
+    /*
+    ======================================================
+    9マス生成
+    ======================================================
+    */
+
+    function createSlots() {
+
+      grid.innerHTML = "";
+
+
+      for (let i = 1; i <= 9; i++) {
+
+        const slot =
+          document.createElement("button");
+
+
+        slot.type = "button";
+
+        slot.className = "slot";
+
+        slot.dataset.slot = String(i);
+
+
+        if (i === 1) {
+          slot.classList.add("active");
+        }
+
+
+        const savedChannel =
+          channelsState[i];
+
+
+        if (savedChannel) {
+
+          renderFilledSlot(
+            slot,
+            savedChannel
+          );
+
+        } else {
+
+          renderEmptySlot(slot);
+
+        }
+
+
+        slot.addEventListener(
+          "click",
+          event => {
+
+            if (
+              event.target.closest(".remove")
+            ) {
+              return;
+            }
+
+            openSearchModal(i);
+
+          }
+        );
+
+
+        grid.appendChild(slot);
+
+      }
+
+    }
+
+
+    function renderEmptySlot(slot) {
+
+      const number =
+        String(slot.dataset.slot)
+          .padStart(2, "0");
+
+
+      slot.classList.remove("filled");
+
+
+      slot.innerHTML = `
+
+        <span class="plus">
+          ＋
+        </span>
+
+        <span class="slot-number">
+          ${number}
+        </span>
+
+      `;
+
+    }
+
+
+    function renderFilledSlot(
+      slot,
+      channel
+    ) {
+
+      const number =
+        String(slot.dataset.slot)
+          .padStart(2, "0");
+
+
+      slot.classList.add("filled");
+
+
+      slot.innerHTML = `
+
+        <button
+          class="remove"
+          type="button"
+          title="削除"
+        >
+          ×
+        </button>
+
+
+        <img
+          class="channel-icon"
+          src="${escapeHtml(channel.thumbnail)}"
+          alt="${escapeHtml(channel.title)}"
+        >
+
+
+        <div class="channel-name">
+
+          ${escapeHtml(channel.title)}
+
+        </div>
+
+
+        <div class="channel-handle">
+
+          ${escapeHtml(channel.customUrl || "")}
+
+        </div>
+
+
+        <div
+          class="slot-number"
+          style="margin-top:8px;"
+        >
+
+          ${number}
+
+        </div>
+
+      `;
+
+
+      const removeButton =
+        slot.querySelector(".remove");
+
+
+      removeButton.addEventListener(
+        "click",
+        event => {
+
+          event.stopPropagation();
+
+
+          const slotNumber =
+            Number(slot.dataset.slot);
+
+
+          delete channelsState[
+            slotNumber
+          ];
+
+
+          saveState();
+
+          renderEmptySlot(slot);
+
+        }
+      );
+
+    }
+
+
+    /*
+    ======================================================
+    モーダル
+    ======================================================
+    */
+
+    function openSearchModal(
+      slotNumber
+    ) {
+
+      selectedSlotNumber =
+        slotNumber;
+
+
+      modal.classList.remove(
+        "hidden"
+      );
+
+
+      searchInput.value = "";
+
+
+      searchResults.innerHTML = `
+
+        <div class="message">
+
+          チャンネル名を入力して検索してください
+
+        </div>
+
+      `;
+
+
+      setTimeout(
+        () => searchInput.focus(),
+        100
+      );
+
+    }
+
+
+    function closeModal() {
+
+      modal.classList.add(
+        "hidden"
+      );
+
+
+      selectedSlotNumber = null;
+
+    }
+
+
+    closeModalButton.addEventListener(
+      "click",
+      closeModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target === modal
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape" &&
+          !modal.classList.contains("hidden")
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    /*
+    ======================================================
+    検索
+    ======================================================
+    */
+
+    searchButton.addEventListener(
+      "click",
+      searchChannels
+    );
+
+
+    searchInput.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          searchChannels();
+
+        }
+
+      }
+    );
+
+
+    guideSearch.addEventListener(
+      "click",
+      () => {
+
+        const firstEmpty =
+          Array.from(
+            { length: 9 },
+            (_, i) => i + 1
+          ).find(
+            i => !channelsState[i]
+          );
+
+
+        if (firstEmpty) {
+
+          openSearchModal(
+            firstEmpty
+          );
+
+        }
+
+      }
+    );
+
+
+    async function searchChannels() {
+
+      const query =
+        searchInput.value.trim();
+
+
+      if (!query) {
+
+        showMessage(
+          "検索語を入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !YOUTUBE_API_KEY ||
+        YOUTUBE_API_KEY ===
+          "ここにAPIキーを入力"
+      ) {
+
+        showError(
+          "YouTube APIキーが設定されていません。コード上部の YOUTUBE_API_KEY にAPIキーを入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      setLoading(true);
+
+
+      showMessage(
+        "YouTubeを検索中..."
+      );
+
+
+      try {
+
+        /*
+        ----------------------------------------------
+        1. search.list でチャンネルIDを取得
+        ----------------------------------------------
+        */
+
+        const searchUrl = new URL(
+          "https://www.googleapis.com/youtube/v3/search"
+        );
+
+
+        searchUrl.searchParams.set(
+          "part",
+          "snippet"
+        );
+
+        searchUrl.searchParams.set(
+          "type",
+          "channel"
+        );
+
+        searchUrl.searchParams.set(
+          "q",
+          query
+        );
+
+        searchUrl.searchParams.set(
+          "maxResults",
+          SEARCH_RESULT_COUNT
+        );
+
+        searchUrl.searchParams.set(
+          "key",
+          YOUTUBE_API_KEY
+        );
+
+
+        const searchResponse =
+          await fetch(searchUrl);
+
+
+        const searchData =
+          await searchResponse.json();
+
+
+        if (
+          !searchResponse.ok
+        ) {
+
+          throw new Error(
+            getYouTubeError(
+              searchData
+            )
+          );
+
+        }
+
+
+        if (
+          !searchData.items ||
+          searchData.items.length === 0
+        ) {
+
+          showMessage(
+            "チャンネルが見つかりませんでした。"
+          );
+
+          return;
+
+        }
+
+
+        const channelIds =
+          searchData.items
+
+            .map(
+              item =>
+                item.id.channelId
+            )
+
+            .filter(Boolean);
+
+
+        /*
+        ----------------------------------------------
+        2. channels.list で詳細情報取得
+        ----------------------------------------------
+        */
+
+        const channelsUrl =
+          new URL(
+            "https://www.googleapis.com/youtube/v3/channels"
+          );
+
+
+        channelsUrl.searchParams.set(
+          "part",
+          "snippet,statistics"
+        );
+
+        channelsUrl.searchParams.set(
+          "id",
+          channelIds.join(",")
+        );
+
+        channelsUrl.searchParams.set(
+          "key",
+          YOUTUBE_API_KEY
+        );
+
+
+        const channelsResponse =
+          await fetch(
+            channelsUrl
+          );
+
+
+        const channelsData =
+          await channelsResponse.json();
+
+
+        if (
+          !channelsResponse.ok
+        ) {
+
+          throw new Error(
+            getYouTubeError(
+              channelsData
+            )
+          );
+
+        }
+
+
+        const detailMap =
+          new Map();
+
+
+        for (
+          const item of
+          channelsData.items || []
+        ) {
+
+          detailMap.set(
+            item.id,
+            item
+          );
+
+        }
+
+
+        /*
+        search結果の順番を維持
+        */
+
+        const channels =
+          channelIds
+
+            .map(id => {
+
+              const item =
+                detailMap.get(id);
+
+
+              if (!item) {
+                return null;
+              }
+
+
+              const snippet =
+                item.snippet || {};
+
+
+              const stats =
+                item.statistics || {};
+
+
+              const thumbnail =
+                snippet.thumbnails
+                  ?.high?.url ||
+
+                snippet.thumbnails
+                  ?.medium?.url ||
+
+                snippet.thumbnails
+                  ?.default?.url ||
+
+                "";
+
+
+              return {
+
+                id:
+                  item.id,
+
+                title:
+                  snippet.title || "",
+
+                description:
+                  snippet.description || "",
+
+                customUrl:
+                  snippet.customUrl || "",
+
+                thumbnail,
+
+                subscriberCount:
+                  stats.hiddenSubscriberCount
+                    ? null
+                    : stats.subscriberCount || null
+
+              };
+
+            })
+
+            .filter(Boolean);
+
+
+        renderSearchResults(
+          channels
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        showError(
+          error.message ||
+          "YouTube検索に失敗しました。"
+        );
+
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+    }
+
+
+    /*
+    ======================================================
+    検索結果表示
+    ======================================================
+    */
+
+    function renderSearchResults(
+      channels
+    ) {
+
+      searchResults.innerHTML = "";
+
+
+      if (
+        channels.length === 0
+      ) {
+
+        showMessage(
+          "チャンネルが見つかりませんでした。"
+        );
+
+        return;
+
+      }
+
+
+      channels.forEach(
+        channel => {
+
+          const item =
+            document.createElement(
+              "button"
+            );
+
+
+          item.type = "button";
+
+          item.className =
+            "result";
+
+
+          item.innerHTML = `
+
+            <img
+              src="${escapeHtml(channel.thumbnail)}"
+              alt=""
+            >
+
+
+            <div class="result-info">
+
+
+              <div class="result-title">
+
+                ${escapeHtml(channel.title)}
+
+              </div>
+
+
+              ${
+                channel.customUrl
+
+                ? `
+
+                  <div class="result-handle">
+
+                    ${escapeHtml(channel.customUrl)}
+
+                  </div>
+
+                `
+
+                : ""
+              }
+
+
+              ${
+                channel.subscriberCount
+
+                ? `
+
+                  <div class="result-subscribers">
+
+                    登録者
+                    ${formatSubscriberCount(
+                      channel.subscriberCount
+                    )}
+
+                  </div>
+
+                `
+
+                : ""
+              }
+
+
+              ${
+                channel.description
+
+                ? `
+
+                  <div class="result-desc">
+
+                    ${escapeHtml(channel.description)}
+
+                  </div>
+
+                `
+
+                : ""
+              }
+
+
+            </div>
+
+          `;
+
+
+          item.addEventListener(
+            "click",
+            () => {
+
+              selectChannel(
+                channel
+              );
+
+            }
+          );
+
+
+          searchResults.appendChild(
+            item
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+    ======================================================
+    チャンネル選択
+    ======================================================
+    */
+
+    function selectChannel(
+      channel
+    ) {
+
+      if (
+        selectedSlotNumber === null
+      ) {
+        return;
+      }
+
+
+      channelsState[
+        selectedSlotNumber
+      ] = channel;
+
+
+      saveState();
+
+      createSlots();
+
+      closeModal();
+
+    }
+
+
+    /*
+    ======================================================
+    localStorage
+    ======================================================
+    */
+
+    function saveState() {
+
+      localStorage.setItem(
+        "youtubeNineChannels",
+        JSON.stringify(
+          channelsState
+        )
+      );
+
+    }
+
+
+    function loadState() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            "youtubeNineChannels"
+          );
+
+
+        if (saved) {
+
+          channelsState =
+            JSON.parse(saved);
+
+        }
+
+      } catch {
+
+        channelsState = {};
+
+      }
+
+    }
+
+
+    userName.addEventListener(
+      "input",
+      () => {
+
+        localStorage.setItem(
+          "youtubeNineChannelsUserName",
+          userName.value
+        );
+
+      }
+    );
+
+
+    function loadUserName() {
+
+      const saved =
+        localStorage.getItem(
+          "youtubeNineChannelsUserName"
+        );
+
+
+      if (saved) {
+
+        userName.value =
+          saved;
+
+      }
+
+    }
+
+
+    /*
+    ======================================================
+    補助関数
+    ======================================================
+    */
+
+    function showMessage(
+      text
+    ) {
+
+      searchResults.innerHTML = `
+
+        <div class="message">
+
+          ${escapeHtml(text)}
+
+        </div>
+
+      `;
+
+    }
+
+
+    function showError(
+      text
+    ) {
+
+      searchResults.innerHTML = `
+
+        <div class="message error">
+
+          ${escapeHtml(text)}
+
+        </div>
+
+      `;
+
+    }
+
+
+    function setLoading(
+      loading
+    ) {
+
+      searchButton.disabled =
+        loading;
+
+
+      searchInput.disabled =
+        loading;
+
+
+      searchButton.textContent =
+        loading
+          ? "検索中"
+          : "検索";
+
+    }
+
+
+    function getYouTubeError(
+      data
+    ) {
+
+      const message =
+        data?.error?.message;
+
+
+      const reason =
+        data?.error?.errors?.[0]
+          ?.reason;
+
+
+      if (
+        reason ===
+        "quotaExceeded"
+      ) {
+
+        return "YouTube APIの1日の利用上限に達しました。";
+
+      }
+
+
+      if (
+        reason ===
+        "keyInvalid"
+      ) {
+
+        return "YouTube APIキーが無効です。";
+
+      }
+
+
+      if (
+        reason ===
+        "accessNotConfigured"
+      ) {
+
+        return "YouTube Data API v3が有効になっていません。Google Cloud Consoleで有効化してください。";
+
+      }
+
+
+      return (
+        message ||
+        "YouTube APIでエラーが発生しました。"
+      );
+
+    }
+
+
+    function formatSubscriberCount(
+      value
+    ) {
+
+      const num =
+        Number(value);
+
+
+      if (
+        !Number.isFinite(num)
+      ) {
+
+        return "";
+
+      }
+
+
+      if (
+        num >= 100000000
+      ) {
+
+        return (
+          Math.round(
+            num / 10000000
+          ) / 10
+        ) + "億人";
+
+      }
+
+
+      if (
+        num >= 10000
+      ) {
+
+        return (
+          Math.round(
+            num / 1000
+          ) / 10
+        ) + "万人";
+
+      }
+
+
+      return (
+        num.toLocaleString(
+          "ja-JP"
+        ) + "人"
+      );
+
+    }
+
+
+    function escapeHtml(
+      text
+    ) {
+
+      return String(
+        text ?? ""
+      )
+
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+
+    }
+
+
+    /*
+    ======================================================
+    起動
+    ======================================================
+    */
+
+    init();
+
+  </script>
+
+</body>
+</html>
